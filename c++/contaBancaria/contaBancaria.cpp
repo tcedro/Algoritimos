@@ -22,11 +22,11 @@ class Conta {
         } //fim do contructor padrao
 
         void depositarValor() {
-            double deposito = 0.0;
+            std::cout << "Deposito bancario" << std::endl << std::endl;
+            double deposito = getValor();
             int escolha = 0;
 
-            std::cout << "Valor a ser depositado: " << std::endl << std::endl;
-            std::cin >> deposito;
+            
             if (deposito <= 0) {
                 std::cout << "ERROR:valor invalido!" << std::endl << std::endl;;
             
@@ -49,11 +49,9 @@ class Conta {
         } // fim do depositarValor
 
         void sacarValor() {
-            double saque = 0;
+            std::cout << "Saque bancario" << std::endl << std::endl;
+            double saque = getValor();
             int escolha = 0;
-            
-            std::cout << "Valor a ser sacado: " << std::endl << std::endl;
-            std::cin >> saque;
             
             if (saque > this->saldo || saque <= 0) {
                 std::cout  << "ERROR:saldo insuficiente ou valor invalido!" << std::endl << std::endl;
@@ -80,11 +78,9 @@ class Conta {
         }
 
         void transferirValor(Conta *link2) {
-            double transferencia;
+            std::cout << "Transferencia bancaria" << std::endl << std::endl;
+            double transferencia = getValor();
             int escolha = 0;
-
-            std::cout << "Valor da tranferencia: " << std::endl << std::endl;
-            std::cin >> transferencia;
 
             if (transferencia > this->saldo || transferencia == 0) {
                 std::cout << "ERROR:saldo insuficiente ou valor invalido!" << std::endl << std::endl;
@@ -137,7 +133,19 @@ class Conta {
             myfile.close();
         }
 
+        double getValor() {
+            double valor;
+            
+            do {
+                std::cout << "Digite o valor: " << std::endl << std::endl;
+                std::cin >> valor;
+            
+            } while (valor <= 0);
+            return valor;
+        }
+
 };
+
 
 void menuBancario(Conta *link, Conta *link2) {
     int opcao = 0;
