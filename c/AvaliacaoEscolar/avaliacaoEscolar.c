@@ -14,12 +14,12 @@ void imprimeAluno(Aluno aluno) {
         
     printf("matricula: %d\n", aluno.matricula);
         
-    printf("nota1: %f\n", aluno.provas[0]);
-    printf("nota2: %f\n", aluno.provas[1]);
-    printf("nota3: %f\n", aluno.provas[2]);
-    printf("total: %f\n", aluno.total);
+    printf("nota1: %.2f\n", aluno.provas[0]);
+    printf("nota2: %.2f\n", aluno.provas[1]);
+    printf("nota3: %.2f\n", aluno.provas[2]);
+    printf("total: %.2f\n", aluno.total);
 
-    printf("frequencia: %f\n", aluno.frequencia);
+    printf("frequencia: %.2f\n", aluno.frequencia);
     
     if(aluno.total < 60) { printf("Aluno reprovado por nota!\n");}
     
@@ -61,21 +61,33 @@ void desalocarMallocs(int n, Aluno *aluno) {
     free(aluno);
 } 
 
+void print(Aluno *aluno, int n) {
+    for (int i = 0; i < n; i++){
+        imprimeAluno(aluno[i]);
+        printf("\n");
+    }
+}
 
-int main() {
+int getAlunos() {
     int n;
 
-    printf("Quantos alunos: ");
-    scanf("%d", &n);
+    do {
+        printf("Quantos alunos: ");
+        scanf("%d", &n);
+    } while (n <= 0);
+    
+    return n;
+}
+
+
+int main() {
+    int n = getAlunos();
 
     Aluno *aluno = malloc(sizeof(int) * n);
 
     matricularAluno(aluno, n);
 
-    for (int i = 0; i < n; i++){
-        imprimeAluno(aluno[i]);
-        printf("\n");
-    }
-
+    print(aluno, n);
+    
     return 0;
 }
